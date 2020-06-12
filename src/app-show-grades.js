@@ -41,14 +41,25 @@ let StudentGradesListElement = ({
             <td style={{
                 textDecoration: isValid ? 'none' : 'line-through'
             }}>
-                <input ref={node => {inputGrade = node;}}
-                       className={'form-control'}
-                       value={grade}
-                       onChange={
-                           () => {
-                               onClickChangeMe(id, inputGrade.value);
-                           }
-                       }/>
+                <select
+                    value={grade}
+                    className={'form-control'}
+                    placeholder={'Type grade'}
+                    ref={node => {inputGrade = node;}}
+                    onChange={
+                        () => {
+                            onClickChangeMe(id, inputGrade.value);
+                        }
+                    }>
+                    <option value={'0'}>Select Grade</option>
+                    <option value={'2'}>2</option>
+                    <option value={'2+'}>2+</option>
+                    <option value={'3'}>3</option>
+                    <option value={'3+'}>3+</option>
+                    <option value={'4'}>4</option>
+                    <option value={'4+'}>4+</option>
+                    <option value={'5'}>5</option>
+                </select>
             </td>
             <td>
                 <span style={{

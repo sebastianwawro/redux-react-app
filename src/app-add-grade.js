@@ -28,10 +28,19 @@ const AddStudentGradeC = ({ dispatch }) => {
                 ref={node => {inputIndexNumber = node;}} />
             <span className={'col-sm-1'}> </span>
             <label>Grade:</label>
-            <input
+            <select
                 className={'form-control'}
                 placeholder={'Type grade'}
-                ref={node => {inputGrade = node;}} />
+                ref={node => {inputGrade = node;}}>
+                <option value={'0'}>Select Grade</option>
+                <option value={'2'}>2</option>
+                <option value={'2+'}>2+</option>
+                <option value={'3'}>3</option>
+                <option value={'3+'}>3+</option>
+                <option value={'4'}>4</option>
+                <option value={'4+'}>4+</option>
+                <option value={'5'}>5</option>
+            </select>
             <span className={'col-sm-1'}> </span>
             <button
                 className={'btn btn-success'}
@@ -45,7 +54,7 @@ const AddStudentGradeC = ({ dispatch }) => {
                     else {
                         dispatch(addStudentGrade(inputIndexNumber.value, inputGrade.value));
                         inputIndexNumber.value='';
-                        inputGrade.value='';
+                        inputGrade.value='0';
                     }
             }}>
                 Add Student Grade
