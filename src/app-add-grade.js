@@ -23,16 +23,16 @@ let AddStudentGradeC = ({ dispatch }) => {
         <form className={'form-inline'}>
             <label>Index Number:</label>
             <input
-                className={'form-control col-md-2'}
+                className={'form-control'}
                 placeholder={'Type index number'}
                 ref={node => {inputIndexNumber = node;}} />
-            <span className={'col-md-1'}> </span>
+            <span className={'col-sm-1'}> </span>
             <label>Grade:</label>
             <input
-                className={'form-control col-md-2'}
+                className={'form-control'}
                 placeholder={'Type grade'}
                 ref={node => {inputGrade = node;}} />
-            <span className={'col-md-1'}> </span>
+            <span className={'col-sm-1'}> </span>
             <button
                 className={'btn btn-success'}
                 onClick={() => {

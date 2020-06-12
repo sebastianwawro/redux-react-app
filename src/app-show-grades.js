@@ -41,6 +41,7 @@ let StudentGradesListElement = ({
                 textDecoration: isValid ? 'none' : 'line-through'
             }}>
                 <input ref={node => {inputGrade = node;}}
+                       className={'form-control'}
                        value={grade}
                        onChange={
                            () => {
@@ -68,6 +69,7 @@ let StudentGradesListElement = ({
                     onClick={() => {
                     onClickUpdateMe(id, grade, true);
                 }}>Revise</button>
+                {' '}
                 <button
                     className={'btn btn-danger'}
                     onClick={() => {
@@ -76,7 +78,7 @@ let StudentGradesListElement = ({
             </td>
         </tr>
     );
-}
+};
 
 
 const StudentGradesListC = ({
