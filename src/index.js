@@ -15,7 +15,7 @@ const studentGradesReducers = combineReducers({
 
 const StudentGradesApp = () => (
     <div>
-        <p>Student Grades App</p>
+        <h1>Student Grades App</h1>
         <AddStudentGradeCC />
         <StudentGradesListCC />
         <AvailableFilters />

@@ -14,11 +14,11 @@ const SwitchFilterLinkC = ({
     onClick
 }) => {
     if (active) {
-        return (<span>{children}</span>);
+        return (<button className={'btn btn-info'}>{children}</button>);
     }
 
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    return (<a href='#' onClick={onClick}> {children} </a>);
+    return (<button className={'btn btn-secondary'} onClick={onClick}> {children} </button>);
 };
 
 const mapStateToLinkProps = (

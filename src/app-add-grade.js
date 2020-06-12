@@ -20,17 +20,29 @@ let AddStudentGradeC = ({ dispatch }) => {
     let inputGrade;
 
     return (
-        <div>
-            <input ref={node => {inputIndexNumber = node;}} />
-            <input ref={node => {inputGrade = node;}} />
-            <button onClick={() => {
+        <form className={'form-inline'}>
+            <label>Index Number:</label>
+            <input
+                className={'form-control col-md-2'}
+                placeholder={'Type index number'}
+                ref={node => {inputIndexNumber = node;}} />
+            <span className={'col-md-1'}> </span>
+            <label>Grade:</label>
+            <input
+                className={'form-control col-md-2'}
+                placeholder={'Type grade'}
+                ref={node => {inputGrade = node;}} />
+            <span className={'col-md-1'}> </span>
+            <button
+                className={'btn btn-success'}
+                onClick={() => {
                 dispatch(addStudentGrade(inputIndexNumber.value, inputGrade.value));
                 inputIndexNumber.value='';
                 inputGrade.value='';
             }}>
                 Add Student Grade
             </button>
-        </div>
+        </form>
     );
 };
 

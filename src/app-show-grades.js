@@ -63,9 +63,16 @@ let StudentGradesListElement = ({
                 </span>
             </td>
             <td>
-                <button onClick={() => {
+                <button
+                    className={'btn btn-primary'}
+                    onClick={() => {
                     onClickUpdateMe(id, grade, true);
                 }}>Revise</button>
+                <button
+                    className={'btn btn-danger'}
+                    onClick={() => {
+                        onClickUpdateMe(id, grade, true);
+                }}>Delete</button>
             </td>
         </tr>
     );
