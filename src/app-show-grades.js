@@ -23,30 +23,7 @@ const deleteGrade = (id) => {
     };
 };
 
-const updateGrade = (id, grade, changeIsValid, doDelete) => {
-    if (changeIsValid) {
-        return {
-            type: 'REVISE_GRADE',
-            id
-        };
-    }
-    else if (doDelete) {
-        return {
-            type: 'DELETE_GRADE',
-            id
-        };
-    }
-    else {
-        return {
-            type: 'CHANGE_GRADE',
-            id,
-            grade
-        };
-    }
-};
-
 let StudentGradesListElement = ({
-    onClickUpdateMe,
     onClickReviseMe,
     onClickChangeMe,
     onClickDeleteMe,
@@ -107,7 +84,6 @@ let StudentGradesListElement = ({
 
 const StudentGradesListC = ({
     studentGrades,
-    onClickUpdate,
     onClickRevise,
     onClickChange,
     onClickDelete
@@ -119,7 +95,6 @@ const StudentGradesListC = ({
             return <StudentGradesListElement
                 key={studentGrade.id}
                 {...studentGrade}
-                onClickUpdateMe={onClickUpdate}
                 onClickReviseMe={onClickRevise}
                 onClickChangeMe={onClickChange}
                 onClickDeleteMe={onClickDelete}
@@ -190,6 +165,8 @@ const getGradesFiltered = (
             return studentGrades.filter(
                 g => g.isValid && g.grade === '5'
             );
+        default:
+            return studentGrades;
     }
 };
 
@@ -208,7 +185,6 @@ const mapDispatchToStudentGradeListProps = (
     dispatch
 ) => {
     return {
-        onClickUpdate: (id, grade, changeIsValid, doDelete) => dispatch(updateGrade(id, grade, changeIsValid, doDelete)),
         onClickRevise: (id) => dispatch(reviseGrade(id)),
         onClickChange: (id, grade) => dispatch(changeGrade(id, grade)),
         onClickDelete: (id) => dispatch(deleteGrade(id))

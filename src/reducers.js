@@ -1,24 +1,3 @@
-import { StudentGrade } from './Student';
-
-/*const studentGradeReducer = (studentGrade, action) =>{
-    switch (action.type) {
-        case 'ADD_GRADE':
-            return new StudentGrade (action.id, action.indexNumber, action.grade, true);
-        case 'CHANGE_GRADE':
-            if (studentGrade.id !== action.id) {
-                return studentGrade;
-            }
-            return new StudentGrade (studentGrade.id, studentGrade.indexNumber, action.grade, studentGrade.isValid);
-        case 'REVISE_GRADE':
-            if (studentGrade.id !== action.id) {
-                return studentGrade;
-            }
-            return new StudentGrade (studentGrade.id, studentGrade.indexNumber, studentGrade.grade, !studentGrade.isValid);
-        default:
-            return studentGrade;
-    }
-};*/
-
 const isValidGrade = (grade) => {
     switch (grade) {
         case '2':
@@ -109,8 +88,22 @@ export const gradesFilter = (
 ) => {
     switch (action.type) {
         case 'SET_GRADES_FILTER':
-            //TODO: reject invalid filters
-            return action.filter;
+            switch (action.filter) {
+                case 'DISPLAY_ALL':
+                case 'DISPLAY_VALID':
+                case 'DISPLAY_INVALID':
+                case 'DISPLAY_2':
+                case 'DISPLAY_2+':
+                case 'DISPLAY_3':
+                case 'DISPLAY_3+':
+                case 'DISPLAY_4':
+                case 'DISPLAY_4+':
+                case 'DISPLAY_5':
+                    return action.filter;
+                default:
+                    alert('Blocked attempt to set invalid filter: ' + action.filter);
+                    return filter;
+            }
         default:
             return filter;
     }
