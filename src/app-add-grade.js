@@ -36,9 +36,17 @@ let AddStudentGradeC = ({ dispatch }) => {
             <button
                 className={'btn btn-success'}
                 onClick={() => {
-                dispatch(addStudentGrade(inputIndexNumber.value, inputGrade.value));
-                inputIndexNumber.value='';
-                inputGrade.value='';
+                    if (inputIndexNumber.value.length !== 6) {
+                        alert('Student Index Number must have exactly 6 digits!');
+                    }
+                    else if (isNaN(inputIndexNumber.value)) {
+                        alert('Student Index Number must be a number!');
+                    }
+                    else {
+                        dispatch(addStudentGrade(inputIndexNumber.value, inputGrade.value));
+                        inputIndexNumber.value='';
+                        inputGrade.value='';
+                    }
             }}>
                 Add Student Grade
             </button>
