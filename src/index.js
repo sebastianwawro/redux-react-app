@@ -7,6 +7,7 @@ import { studentGradesReducer, gradesFilter } from './reducers';
 import { AddStudentGradeCC } from './app-add-grade';
 import { StudentGradesListCC } from './app-show-grades';
 import { AvailableFilters } from './app-filter-grades';
+import { StudentAvgGradesListCC } from './app-calc-grade';
 
 const studentGradesReducers = combineReducers({
     studentGradesReducer,
@@ -23,6 +24,8 @@ const StudentGradesApp = () => (
         <hr/>
         <AvailableFilters />
         <hr/>
+        <StudentAvgGradesListCC />
+        <hr />
         <p>
             App usage:<br/>
             -> type index number and grade and click button 'Add Student Grade' to add grade<br/>
