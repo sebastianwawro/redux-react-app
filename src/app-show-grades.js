@@ -44,7 +44,6 @@ let StudentGradesListElement = ({
                 <select
                     value={grade}
                     className={'form-control'}
-                    placeholder={'Type grade'}
                     ref={node => {inputGrade = node;}}
                     onChange={
                         () => {

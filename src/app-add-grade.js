@@ -30,7 +30,6 @@ const AddStudentGradeC = ({ dispatch }) => {
             <label>Grade:</label>
             <select
                 className={'form-control'}
-                placeholder={'Type grade'}
                 ref={node => {inputGrade = node;}}>
                 <option value={'0'}>Select Grade</option>
                 <option value={'2'}>2</option>
