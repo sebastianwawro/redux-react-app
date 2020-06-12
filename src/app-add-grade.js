@@ -15,7 +15,7 @@ const addStudentGrade = (indexNumber, grade) => {
 //TODO: check if grade is valid
 //TODO: C - component
 //TODO: CC - connected component
-let AddStudentGradeC = ({ dispatch }) => {
+const AddStudentGradeC = ({ dispatch }) => {
     let inputIndexNumber;
     let inputGrade;
 
