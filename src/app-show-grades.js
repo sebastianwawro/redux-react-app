@@ -8,6 +8,21 @@ const reviseGrade = (id) => {
     };
 };
 
+const changeGrade = (id, grade) => {
+    return {
+        type: 'CHANGE_GRADE',
+        id,
+        grade
+    };
+};
+
+const deleteGrade = (id) => {
+    return {
+        type: 'DELETE_GRADE',
+        id
+    };
+};
+
 const updateGrade = (id, grade, changeIsValid, doDelete) => {
     if (changeIsValid) {
         return {
@@ -19,7 +34,7 @@ const updateGrade = (id, grade, changeIsValid, doDelete) => {
         return {
             type: 'DELETE_GRADE',
             id
-        }
+        };
     }
     else {
         return {
@@ -32,6 +47,9 @@ const updateGrade = (id, grade, changeIsValid, doDelete) => {
 
 let StudentGradesListElement = ({
     onClickUpdateMe,
+    onClickReviseMe,
+    onClickChangeMe,
+    onClickDeleteMe,
     id,
     indexNumber,
     grade,
@@ -51,7 +69,7 @@ let StudentGradesListElement = ({
                        value={grade}
                        onChange={
                            () => {
-                               onClickUpdateMe(id, inputGrade.value, false, false);
+                               onClickChangeMe(id, inputGrade.value);
                            }
                        }/>
             </td>
@@ -73,13 +91,13 @@ let StudentGradesListElement = ({
                 <button
                     className={'btn btn-primary'}
                     onClick={() => {
-                    onClickUpdateMe(id, grade, true, false);
+                    onClickReviseMe(id);
                 }}>Revise</button>
                 {' '}
                 <button
                     className={'btn btn-danger'}
                     onClick={() => {
-                        onClickUpdateMe(id, grade, false, true);
+                        onClickDeleteMe(id);
                 }}>Delete</button>
             </td>
         </tr>
@@ -89,7 +107,10 @@ let StudentGradesListElement = ({
 
 const StudentGradesListC = ({
     studentGrades,
-    onClickUpdate
+    onClickUpdate,
+    onClickRevise,
+    onClickChange,
+    onClickDelete
 }) => {
 
     let helper;
@@ -99,6 +120,9 @@ const StudentGradesListC = ({
                 key={studentGrade.id}
                 {...studentGrade}
                 onClickUpdateMe={onClickUpdate}
+                onClickReviseMe={onClickRevise}
+                onClickChangeMe={onClickChange}
+                onClickDeleteMe={onClickDelete}
             />;
         });
     }
@@ -184,10 +208,10 @@ const mapDispatchToStudentGradeListProps = (
     dispatch
 ) => {
     return {
-        onClickUpdate: (id, grade, changeIsValid, doDelete) => {
-            //dispatch(reviseGrade(id));
-            dispatch(updateGrade(id, grade, changeIsValid, doDelete))
-        }
+        onClickUpdate: (id, grade, changeIsValid, doDelete) => dispatch(updateGrade(id, grade, changeIsValid, doDelete)),
+        onClickRevise: (id) => dispatch(reviseGrade(id)),
+        onClickChange: (id, grade) => dispatch(changeGrade(id, grade)),
+        onClickDelete: (id) => dispatch(deleteGrade(id))
     };
 };
 
