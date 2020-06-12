@@ -19,6 +19,21 @@ import { StudentGrade } from './Student';
     }
 };*/
 
+const isValidGrade = (grade) => {
+    switch (grade) {
+        case '2':
+        case '2+':
+        case '3':
+        case '3+':
+        case '4':
+        case '4+':
+        case '5':
+            return true;
+        default:
+            return false;
+    }
+};
+
 const studentGradeReducer = (studentGrade, action) =>{
     switch (action.type) {
         case 'ADD_GRADE':
@@ -26,7 +41,7 @@ const studentGradeReducer = (studentGrade, action) =>{
                 id: action.id,
                 indexNumber: action.indexNumber,
                 grade: action.grade,
-                isValid: true
+                isValid: isValidGrade(action.grade)
             };
         case 'CHANGE_GRADE':
             if (studentGrade.id !== action.id) {
@@ -36,7 +51,7 @@ const studentGradeReducer = (studentGrade, action) =>{
                 id: studentGrade.id,
                 indexNumber: studentGrade.indexNumber,
                 grade: action.grade,
-                isValid: studentGrade.isValid
+                isValid: isValidGrade(action.grade)
             };
         case 'REVISE_GRADE':
             if (studentGrade.id !== action.id) {
