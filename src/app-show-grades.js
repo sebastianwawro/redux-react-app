@@ -8,25 +8,73 @@ const reviseGrade = (id) => {
     };
 };
 
-const StudentGradesListElement = ({
-    onClick,
+const updateGrade = (id, grade, changeIsValid) => {
+    if (changeIsValid) {
+        return {
+            type: 'REVISE_GRADE',
+            id
+        };
+    }
+    else {
+        return {
+            type: 'CHANGE_GRADE',
+            id,
+            grade
+        };
+    }
+};
+
+let StudentGradesListElement = ({
+    onClickUpdateMe,
+    id,
     indexNumber,
     grade,
     isValid
-}) => (
-    <tr onClick={onClick}
-        style={{
-            textDecoration: isValid ? 'none' : 'line-through'
-        }}
-    >
-        <td>{indexNumber}</td>
-        <td>{grade}</td>
-    </tr>
-);
+}) => {
+    let inputGrade;
+    return (
+        <tr>
+            <td style={{
+                textDecoration: isValid ? 'none' : 'line-through'
+            }}>{indexNumber}</td>
+            <td style={{
+                textDecoration: isValid ? 'none' : 'line-through'
+            }}>
+                <input ref={node => {inputGrade = node;}}
+                       value={grade}
+                       onChange={
+                           () => {
+                               onClickUpdateMe(id, inputGrade.value, false);
+                           }
+                       }/>
+            </td>
+            <td>
+                <span style={{
+                    display: isValid ? 'block' : 'none',
+                    color: 'blue'
+                }}>
+                    Valid
+                </span>
+                <span style={{
+                    display: !isValid ? 'block' : 'none',
+                    color: 'red'
+                }}>
+                    Invalid
+                </span>
+            </td>
+            <td>
+                <button onClick={() => {
+                    onClickUpdateMe(id, grade, true);
+                }}>Revise</button>
+            </td>
+        </tr>
+    );
+}
+
 
 const StudentGradesListC = ({
     studentGrades,
-    onGradeClick
+    onClickUpdate
 }) => {
 
     let helper;
@@ -35,21 +83,29 @@ const StudentGradesListC = ({
             return <StudentGradesListElement
                 key={studentGrade.id}
                 {...studentGrade}
-                onClick={() => onGradeClick(studentGrade.id)}
+                onClickUpdateMe={onClickUpdate}
             />;
         });
     }
-    return <table>
-        <thead>
+
+    if (studentGrades.length > 0) {
+        return <table className={'table'}>
+            <thead>
             <tr>
                 <th>Index Number</th>
                 <th>Grade</th>
+                <th>Status</th>
+                <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             { helper }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    }
+    else {
+        return <p>There are no records yet!</p>
+    }
 };
 
 const getGradesFiltered = (
@@ -69,31 +125,31 @@ const getGradesFiltered = (
             );
         case 'DISPLAY_2':
             return studentGrades.filter(
-                g => g.grade === '2'
+                g => g.isValid && g.grade === '2'
             );
         case 'DISPLAY_2+':
             return studentGrades.filter(
-                g => g.grade === '2,5'
+                g => g.isValid && g.grade === '2,5'
             );
         case 'DISPLAY_3':
             return studentGrades.filter(
-                g => g.grade === '3'
+                g => g.isValid && g.grade === '3'
             );
         case 'DISPLAY_3+':
             return studentGrades.filter(
-                g => g.grade === '3,5'
+                g => g.isValid && g.grade === '3,5'
             );
         case 'DISPLAY_4':
             return studentGrades.filter(
-                g => g.grade === '4'
+                g => g.isValid && g.grade === '4'
             );
         case 'DISPLAY_4+':
             return studentGrades.filter(
-                g => g.grade === '4,5'
+                g => g.isValid && g.grade === '4,5'
             );
         case 'DISPLAY_5':
             return studentGrades.filter(
-                g => g.grade === '5'
+                g => g.isValid && g.grade === '5'
             );
     }
 };
@@ -113,8 +169,9 @@ const mapDispatchToStudentGradeListProps = (
     dispatch
 ) => {
     return {
-        onGradeClick: (id) => {
-            dispatch(reviseGrade(id));
+        onClickUpdate: (id, grade, changeIsValid) => {
+            //dispatch(reviseGrade(id));
+            dispatch(updateGrade(id, grade, changeIsValid))
         }
     };
 };

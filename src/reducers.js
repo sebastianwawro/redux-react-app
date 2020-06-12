@@ -62,6 +62,8 @@ export const studentGradesReducer = (students = [], action) => {
             ];
         case 'CHANGE_GRADE':
             return students.map(s => studentGradeReducer(s, action));
+        case 'REVISE_GRADE':
+            return students.map(s => studentGradeReducer(s, action));
         default:
             return students;
     }
