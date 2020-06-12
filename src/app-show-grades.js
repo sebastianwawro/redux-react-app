@@ -8,12 +8,18 @@ const reviseGrade = (id) => {
     };
 };
 
-const updateGrade = (id, grade, changeIsValid) => {
+const updateGrade = (id, grade, changeIsValid, doDelete) => {
     if (changeIsValid) {
         return {
             type: 'REVISE_GRADE',
             id
         };
+    }
+    else if (doDelete) {
+        return {
+            type: 'DELETE_GRADE',
+            id
+        }
     }
     else {
         return {
@@ -45,7 +51,7 @@ let StudentGradesListElement = ({
                        value={grade}
                        onChange={
                            () => {
-                               onClickUpdateMe(id, inputGrade.value, false);
+                               onClickUpdateMe(id, inputGrade.value, false, false);
                            }
                        }/>
             </td>
@@ -67,13 +73,13 @@ let StudentGradesListElement = ({
                 <button
                     className={'btn btn-primary'}
                     onClick={() => {
-                    onClickUpdateMe(id, grade, true);
+                    onClickUpdateMe(id, grade, true, false);
                 }}>Revise</button>
                 {' '}
                 <button
                     className={'btn btn-danger'}
                     onClick={() => {
-                        onClickUpdateMe(id, grade, true);
+                        onClickUpdateMe(id, grade, false, true);
                 }}>Delete</button>
             </td>
         </tr>
@@ -178,9 +184,9 @@ const mapDispatchToStudentGradeListProps = (
     dispatch
 ) => {
     return {
-        onClickUpdate: (id, grade, changeIsValid) => {
+        onClickUpdate: (id, grade, changeIsValid, doDelete) => {
             //dispatch(reviseGrade(id));
-            dispatch(updateGrade(id, grade, changeIsValid))
+            dispatch(updateGrade(id, grade, changeIsValid, doDelete))
         }
     };
 };

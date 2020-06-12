@@ -53,19 +53,38 @@ const studentGradeReducer = (studentGrade, action) =>{
     }
 };
 
-export const studentGradesReducer = (students = [], action) => {
+export const studentGradesReducer = (studentGrades = [], action) => {
     switch (action.type) {
         case 'ADD_GRADE':
             return [
-                ...students,
+                ...studentGrades,
                 studentGradeReducer(undefined, action)
             ];
         case 'CHANGE_GRADE':
-            return students.map(s => studentGradeReducer(s, action));
+            return studentGrades.map(s => studentGradeReducer(s, action));
         case 'REVISE_GRADE':
-            return students.map(s => studentGradeReducer(s, action));
+            return studentGrades.map(s => studentGradeReducer(s, action));
+        case 'DELETE_GRADE':
+            return studentGrades.filter(s => s.id !== action.id);
+        case 'TEST':
+            if (studentGrades.length === 1) {
+                return [];
+            }
+            else {
+                return studentGrades.reduce((accumulator, studentGrade) => {
+                    if (studentGrade.id !== action.id) {
+                        return [
+                            ...accumulator,
+                            studentGrade
+                        ];
+                    }
+                    else {
+                        return accumulator;
+                    }
+                });
+            }
         default:
-            return students;
+            return studentGrades;
     }
 };
 
