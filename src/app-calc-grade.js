@@ -1,32 +1,5 @@
 import React from 'react';
 import {connect} from "react-redux";
-const remapArray = (remappedArray, sourceArray) => {
-    if (remappedArray[sourceArray.indexNumber] !== undefined) {
-        return Object.assign({}, remappedArray, remappedArray[sourceArray.indexNumber] = remappedArray[sourceArray.indexNumber] + sourceArray.grade);
-    } else {
-        return Object.assign({}, remappedArray, remappedArray[sourceArray.indexNumber]=sourceArray.grade);
-    }
-};
-
-const calcAvg = (studentGrades) => {
-    let avgGrades;
-    for(let i=0; i<studentGrades.length; i++) {
-        let isCurrentValid = studentGrades[i].isValid;
-        if (isCurrentValid) {
-            let currentIndexNumber = studentGrades[i].indexNumber;
-            let currentGrade = studentGrades[i].grade;
-            if (avgGrades[currentIndexNumber] !== undefined) {
-                avgGrades[currentIndexNumber].gradesSum += currentGrade;
-                avgGrades[currentIndexNumber].gradesCount += 1;
-            }
-            else {
-                avgGrades[currentIndexNumber].gradesSum = currentGrade;
-                avgGrades[currentIndexNumber].gradesCount = 1;
-            }
-        }
-    }
-    return avgGrades;
-};
 
 const gradeStringToInt = (grade) => {
     switch(grade) {
@@ -84,7 +57,7 @@ const avgGradeToFinalGrade = (grade) => {
 };
 
 let tmpCnt = 0;
-const calcAvgAlt = (studentGrades) => {
+const calcAvg = (studentGrades) => {
     return studentGrades
         .filter(g => g.isValid)
         .map(g => g.indexNumber)
@@ -209,7 +182,7 @@ const mapStateToStudentAvgGradeListProps = (
     state
 ) => {
     return {
-        studentGrades: calcAvgAlt(getGradesFiltered(
+        studentGrades: calcAvg(getGradesFiltered(
             state.studentGradesReducer,
             state.gradesFilter
         ))

@@ -17,19 +17,19 @@ const studentGradesReducers = combineReducers({
 const StudentGradesApp = () => (
     <div className={'container'}>
         <h1>Student Grades App</h1>
-        <hr/>
+        <hr />
         <AddStudentGradeCC />
-        <hr/>
+        <hr />
         <StudentGradesListCC />
-        <hr/>
+        <hr />
         <AvailableFilters />
-        <hr/>
+        <hr />
         <StudentAvgGradesListCC />
         <hr />
         <p>
             App usage:<br/>
             -> type index number and grade and click button 'Add Student Grade' to add grade<br/>
-            -> to change grade just type it in right input - it will be autosaved<br/>
+            -> to change grade just type it into proper input - it will be autosaved<br/>
             -> to revise grade to invalid/valid click 'Revise' button<br/>
             -> to filter grades use one of buttons beneath the table<br/>
             -> to delete grade click 'Delete' button<br/>
