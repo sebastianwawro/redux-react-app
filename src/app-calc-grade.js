@@ -64,7 +64,6 @@ const calcAvg = (studentGrades) => {
         .filter((value, index, self) => self.indexOf(value) === index)
         .map(i => {
             let myGrades = studentGrades.filter(g => g.isValid && g.indexNumber === i).map(g => gradeStringToInt(g.grade));
-            console.log(myGrades);
             let average = myGrades.reduce((a, b) => a + b) / myGrades.length;
             return {
                 id: tmpCnt++,
@@ -76,7 +75,7 @@ const calcAvg = (studentGrades) => {
 };
 
 
-let StudentAvgGradesListElement = ({
+const StudentAvgGradesListElement = ({
     indexNumber,
     avgGrade,
     finalGrade

@@ -42,6 +42,7 @@ const AddStudentGradeC = ({ dispatch }) => {
             </select>
             <span className={'col-sm-1'}> </span>
             <button
+                type={'button'}
                 className={'btn btn-success'}
                 onClick={() => {
                     if (inputIndexNumber.value.length !== 6) {

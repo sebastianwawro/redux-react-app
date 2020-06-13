@@ -23,7 +23,7 @@ const deleteGrade = (id) => {
     };
 };
 
-let StudentGradesListElement = ({
+const StudentGradesListElement = ({
     onClickReviseMe,
     onClickChangeMe,
     onClickDeleteMe,
