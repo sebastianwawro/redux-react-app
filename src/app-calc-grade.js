@@ -129,62 +129,14 @@ const StudentAvgGradesListC = ({
     }
 };
 
-const getGradesFiltered = (
-    studentGrades,
-    filter
-) => {
-    switch (filter) {
-        case 'DISPLAY_ALL':
-            return studentGrades;
-        case 'DISPLAY_VALID':
-            return studentGrades.filter(
-                g => g.isValid
-            );
-        case 'DISPLAY_INVALID':
-            return studentGrades.filter(
-                g => !g.isValid
-            );
-        case 'DISPLAY_2':
-            return studentGrades.filter(
-                g => g.isValid && g.grade === '2'
-            );
-        case 'DISPLAY_2+':
-            return studentGrades.filter(
-                g => g.isValid && g.grade === '2,5'
-            );
-        case 'DISPLAY_3':
-            return studentGrades.filter(
-                g => g.isValid && g.grade === '3'
-            );
-        case 'DISPLAY_3+':
-            return studentGrades.filter(
-                g => g.isValid && g.grade === '3,5'
-            );
-        case 'DISPLAY_4':
-            return studentGrades.filter(
-                g => g.isValid && g.grade === '4'
-            );
-        case 'DISPLAY_4+':
-            return studentGrades.filter(
-                g => g.isValid && g.grade === '4,5'
-            );
-        case 'DISPLAY_5':
-            return studentGrades.filter(
-                g => g.isValid && g.grade === '5'
-            );
-        default:
-            return studentGrades;
-    }
-};
-
 const mapStateToStudentAvgGradeListProps = (
     state
 ) => {
     return {
-        studentGrades: calcAvg(getGradesFiltered(
+        studentGrades: calcAvg(
             state.studentGradesReducer,
             state.gradesFilter
-        ))
+        )
     };
 };
 
