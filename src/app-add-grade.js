@@ -11,10 +11,6 @@ const addStudentGrade = (indexNumber, grade) => {
     };
 };
 
-//TODO: check if index not empty
-//TODO: check if grade is valid
-//TODO: C - component
-//TODO: CC - connected component
 const AddStudentGradeC = ({ dispatch }) => {
     let inputIndexNumber;
     let inputGrade;
